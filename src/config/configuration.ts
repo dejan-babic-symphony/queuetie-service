@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { QueuetieServiceConfig } from './configuration.types';
+import { verify } from './utils';
 
 export default () => {
   const logger = new Logger('Configuration');
@@ -19,19 +20,7 @@ export default () => {
     },
   };
 
-  for (const key of Object.keys(configuration)) {
-    if (typeof configuration[key] === 'object') {
-      for (const nestedKey of Object.keys(configuration[key])) {
-        if (configuration[key][nestedKey] === undefined || configuration[key][nestedKey] === null) {
-          throw new Error(`Configuration ${key}.${nestedKey} is not set`);
-        }
-      }
-    }
-
-    if (configuration[key] === undefined || configuration[key] === null) {
-      throw new Error(`Configuration ${key} is not set`);
-    }
-  }
+  verify(configuration);
 
   logger.log(`Queuetie Service configuration loaded`);
 
