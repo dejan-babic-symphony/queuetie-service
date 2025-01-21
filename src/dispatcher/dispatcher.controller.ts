@@ -4,7 +4,8 @@ import { JobRequest } from './dto/job.request.dto';
 import { JobResponse } from './dto/job.response.dto';
 import { SimulateDispatchDocs } from './docs/simulateDocs';
 import { EventDispatcherService } from './event-dispatcher.service';
-import { makeServiceErrorEvent, makeServiceInfoEvent } from './dispatcher.utils';
+import { makeServiceInfoEvent } from '../utils/events';
+import { makeServiceErrorEvent } from '../utils/events';
 
 @Controller('dispatcher')
 export class DispatcherController {
