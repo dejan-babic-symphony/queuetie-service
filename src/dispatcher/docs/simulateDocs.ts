@@ -1,7 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { JobRequest } from '../dto/job.request.dto';
-import { JobResponse } from '../dto/job.response.dto';
+import { SimulateRequest } from '../dto/simulate.request.dto';
+import { SimulateResponse } from '../dto/simulate.response.dto';
 import { ValidationResponse } from '../dto/validation.response.dto';
 
 export function SimulateDispatchDocs() {
@@ -11,12 +11,12 @@ export function SimulateDispatchDocs() {
       description: 'Dispatches jobs based on the provided type, delay, and desired number of jobs',
     }),
     ApiBody({
-      type: JobRequest,
+      type: SimulateRequest,
     }),
     ApiResponse({
       status: 201,
       description: 'Simulated job dispatching response',
-      type: JobResponse,
+      type: SimulateResponse,
     }),
     ApiResponse({
       status: 400,

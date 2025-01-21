@@ -1,5 +1,5 @@
 import { UUID } from 'crypto';
-import { JobType } from './dto/job.request.dto';
+import { JobType } from './dto/simulate.request.dto';
 
 export const JobRequestMock = {
   type: JobType.SINGLE,

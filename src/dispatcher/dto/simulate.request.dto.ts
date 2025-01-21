@@ -53,7 +53,7 @@ export class Organization {
   name: string;
 }
 
-export class JobEcho {
+export class Echo {
   @ApiProperty({
     description: 'The number of jobs being dispatched',
     default: 500,
@@ -90,7 +90,7 @@ export class JobEcho {
   organization: Organization;
 }
 
-export class JobRequest {
+export class SimulateRequest {
   @ApiProperty({
     description: 'The type of the job being simulated',
     enum: JobType,
@@ -120,9 +120,9 @@ export class JobRequest {
 
   @ApiProperty({
     description: 'Job echo, used to determine scope of emitted websocket messages',
-    type: JobEcho,
+    type: Echo,
   })
   @ValidateNested()
-  @Type(() => JobEcho)
-  echo: JobEcho;
+  @Type(() => Echo)
+  echo: Echo;
 }

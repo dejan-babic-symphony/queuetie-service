@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('Queuetie Service')
     .setDescription('Dispatches jobs for Queuetie simulations')
     .setVersion('1.0')
+    .addTag('Dispatcher', 'Everything related to dispatching jobs')
     .build();
 
   const options: SwaggerDocumentOptions = {
