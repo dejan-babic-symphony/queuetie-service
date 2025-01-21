@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { QueuetieServiceConfig } from './configuration.types';
-import { verify } from './utils';
+import { verify } from '../utils';
 
 export default () => {
   const logger = new Logger('Configuration');

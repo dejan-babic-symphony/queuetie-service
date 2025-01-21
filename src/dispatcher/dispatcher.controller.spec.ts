@@ -7,7 +7,7 @@ import {
   JobRequestMock,
   QueueDispatcherServiceMock,
 } from './test.mocks';
-import { makeServiceErrorEvent, makeServiceInfoEvent } from './dispatcher.utils';
+import { makeServiceErrorEvent, makeServiceInfoEvent } from '../utils';
 
 describe('DispatcherController', () => {
   let controller: DispatcherController;

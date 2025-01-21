@@ -1,6 +1,6 @@
-import { verify } from './utils';
+import { verify } from './configuration';
 
-describe('Configuration', () => {
+describe('Utils', () => {
   describe('verify', () => {
     it('should throw an error if a key is missing in the config', () => {
       const configuration = {
