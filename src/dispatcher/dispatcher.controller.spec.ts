@@ -29,7 +29,7 @@ describe('DispatcherController', () => {
     controller = module.get<DispatcherController>(DispatcherController);
   });
 
-  it('should dispatch jobs and emit info event using providers and return echo', async () => {
+  it('should call simulate, broadcast the service.info event, and return the echo', async () => {
     const payload = { ...JobRequestMock };
     const broadcastEvent = makeServiceInfoEvent(payload.echo.user.id);
 
@@ -42,7 +42,7 @@ describe('DispatcherController', () => {
     expect(result).toBe(payload.echo);
   });
 
-  it('should emit error event using provider when queue dispatcher fails and rethrow', async () => {
+  it('should broadcast the service.error event, and re-throw the error on failure', async () => {
     const payload = { ...JobRequestMock };
     const broadcastEvent = makeServiceErrorEvent(payload.echo.user.id);
 
