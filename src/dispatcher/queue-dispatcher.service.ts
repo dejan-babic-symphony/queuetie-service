@@ -1,7 +1,7 @@
 import { InjectQueue } from '@nestjs/bullmq';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Queue } from 'bullmq';
-import { JobRequest, JobType } from './dto/job.request.dto';
+import { SimulateRequest, JobType } from './dto/simulate.request.dto';
 
 @Injectable()
 export class QueueDispatcherService {
@@ -14,7 +14,7 @@ export class QueueDispatcherService {
     private readonly secondQueue: Queue
   ) {}
 
-  public async simulate(payload: JobRequest): Promise<JobRequest['echo']> {
+  public async simulate(payload: SimulateRequest): Promise<SimulateRequest['echo']> {
     const { type, delay, queue, echo } = payload;
 
     const queueHandler = this.resolveHandler(queue);
