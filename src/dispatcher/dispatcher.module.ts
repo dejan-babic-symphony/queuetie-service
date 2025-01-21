@@ -6,15 +6,11 @@ import { EventDispatcherService } from './event-dispatcher.service';
 
 @Module({
   imports: [
-    BullModule.registerQueue({
-      name: process.env.SRV_EVENTS_QUEUE,
-    }),
-    BullModule.registerQueue({
-      name: process.env.SRV_FIRST_QUEUE,
-    }),
-    BullModule.registerQueue({
-      name: process.env.SRV_SECOND_QUEUE,
-    }),
+    BullModule.registerQueue(
+      { name: process.env.SRV_EVENTS_QUEUE },
+      { name: process.env.SRV_FIRST_QUEUE },
+      { name: process.env.SRV_SECOND_QUEUE }
+    ),
   ],
   exports: [QueueDispatcherService, EventDispatcherService],
   controllers: [DispatcherController],

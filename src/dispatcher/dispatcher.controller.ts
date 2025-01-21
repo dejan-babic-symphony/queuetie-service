@@ -4,7 +4,6 @@ import { JobRequest } from './dto/job.request.dto';
 import { JobResponse } from './dto/job.response.dto';
 import { SimulateDispatchDocs } from './docs/simulateDocs';
 import { EventDispatcherService } from './event-dispatcher.service';
-import { BroadcastEvent, Channel } from './types';
 import { makeServiceErrorEvent, makeServiceInfoEvent } from './dispatcher.utils';
 
 @Controller('dispatcher')
@@ -32,7 +31,6 @@ export class DispatcherController {
     } catch (error) {
       this.logger.log('Failed dispatching jobs', { error });
       this.eventsDispatcherService.broadcast(makeServiceErrorEvent(userId));
-
       throw error;
     }
   }
