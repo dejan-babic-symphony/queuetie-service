@@ -29,7 +29,27 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Step 4: Generate version and changelog on develop
+      # Step 4: Extract PR message
+      - name: Extract PR message
+        id: pr_message
+        run: |
+          echo "pr_body=$(echo '${{ github.event.pull_request.body }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      # Step 5: Determine release type based on PR message
+      - name: Determine release type
+        id: release_type
+        run: |
+          if [[ "$pr_body" =~ "#major" ]]; then
+            echo "release_type=major" >> $GITHUB_ENV
+          elif [[ "$pr_body" =~ "#patch" ]]; then
+            echo "release_type=patch" >> $GITHUB_ENV
+          else
+            echo "release_type=minor" >> $GITHUB_ENV
+          fi
+        env:
+          pr_body: ${{ env.pr_body }}
+
+      # Step 6: Generate version and changelog on develop
       - name: Bump version and update changelog
         run: |
           git checkout develop
@@ -38,14 +58,14 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git push origin develop --follow-tags
 
-      # Step 5: Fast-forward merge develop -> main
+      # Step 7: Fast-forward merge develop -> main
       - name: Merge develop into main
         run: |
           git checkout main
           git merge --ff-only develop
           git push origin main
 
-      # Step 6: Create GitHub release
+      # Step 8: Create GitHub release
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
