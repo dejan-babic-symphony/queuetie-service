@@ -3,7 +3,7 @@ import { JobType } from './dto/simulate.request.dto';
 
 export const JobRequestMock = {
   type: JobType.SINGLE,
-  queue: 'queuetie.first',
+  queue: process.env.SRV_FIRST_QUEUE,
   delay: 10,
   echo: {
     total: 500,
@@ -25,4 +25,16 @@ export const QueueDispatcherServiceMock = {
 
 export const EventDispatcherServiceMock = {
   broadcast: jest.fn(),
+};
+
+export const BullQueueFirstMock = {
+  add: jest.fn(),
+  process: jest.fn(),
+  on: jest.fn(),
+};
+
+export const BullQueueSecondMock = {
+  add: jest.fn(),
+  process: jest.fn(),
+  on: jest.fn(),
 };
