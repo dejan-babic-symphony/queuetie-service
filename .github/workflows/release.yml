@@ -53,9 +53,9 @@ jobs:
       - name: Bump version and update changelog
         run: |
           git checkout develop
-          npx standard-version
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          npx standard-version
           git push origin develop --follow-tags
 
       # Step 7: Fast-forward merge develop -> main
