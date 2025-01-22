@@ -2,7 +2,7 @@ import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { QueueDispatcherService } from './queue-dispatcher.service';
 import { SimulateRequest } from './dto/simulate.request.dto';
 import { SimulateResponse } from './dto/simulate.response.dto';
-import { SimulateDispatchDocs } from './docs/simulateDocs';
+import { DispatcherSimulateDocs } from './docs/dispatcher.simulate.docs';
 import { EventDispatcherService } from './event-dispatcher.service';
 import { makeServiceInfoEvent } from '../utils/events';
 import { makeServiceErrorEvent } from '../utils/events';
@@ -17,7 +17,7 @@ export class DispatcherController {
   ) {}
 
   @Post('/simulate')
-  @SimulateDispatchDocs()
+  @DispatcherSimulateDocs()
   async simulate(@Body() payload: SimulateRequest): Promise<SimulateResponse> {
     this.logger.log('Received request for simulating jobs', { payload });
 
