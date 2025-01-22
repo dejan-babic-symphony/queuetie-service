@@ -1,5 +1,6 @@
 import { UUID } from 'crypto';
 import { JobType } from './dto/simulate.request.dto';
+import { emit } from 'process';
 
 export const JobRequestMock = {
   type: JobType.SINGLE,
@@ -25,6 +26,10 @@ export const QueueDispatcherServiceMock = {
 
 export const EventDispatcherServiceMock = {
   broadcast: jest.fn(),
+};
+
+export const EventEmitter2Mock = {
+  emit: jest.fn(),
 };
 
 export const BullQueueFirstMock = {
