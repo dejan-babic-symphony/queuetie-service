@@ -4,7 +4,7 @@ import { SimulateRequest } from '../dto/simulate.request.dto';
 import { SimulateResponse } from '../dto/simulate.response.dto';
 import { ValidationResponse } from '../dto/validation.response.dto';
 
-export function SimulateDispatchDocs() {
+export function DispatcherSimulateDocs() {
   return applyDecorators(
     ApiOperation({
       summary: 'Handles dispatching simulation jobs',
