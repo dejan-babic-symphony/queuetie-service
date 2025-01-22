@@ -1,6 +1,7 @@
 # Queuetie Service 🚀
 
 [![Build & Test](https://github.com/dejan-babic-symphony/queuetie-service/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/dejan-babic-symphony/queuetie-service/actions/workflows/build-and-test.yml)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/dejan-babic-symphony/queuetie-service)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 NestJS based app that is part of the Queuetie system responsible for dispatching simulation jobs

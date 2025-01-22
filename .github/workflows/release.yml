@@ -1,0 +1,52 @@
+name: Release and Sync
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'develop'
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch full history for versioning and tagging
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Generate version and changelog on develop
+      - name: Bump version and update changelog
+        run: |
+          git checkout develop
+          npx standard-version
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git push origin develop --follow-tags
+
+      # Step 5: Fast-forward merge develop -> main
+      - name: Merge develop into main
+        run: |
+          git checkout main
+          git merge --ff-only develop
+          git push origin main
+
+      # Step 6: Create GitHub release
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
