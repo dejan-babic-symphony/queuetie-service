@@ -4,7 +4,12 @@ dotenv.config();
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
+import {
+  DocumentBuilder,
+  SwaggerCustomOptions,
+  SwaggerDocumentOptions,
+  SwaggerModule,
+} from '@nestjs/swagger';
 import { HttpStatus, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
@@ -21,9 +26,14 @@ async function bootstrap() {
     operationIdFactory: (_, methodKey: string) => methodKey,
   };
 
+  const custom: SwaggerCustomOptions = {
+    jsonDocumentUrl: '/openapi.json',
+    yamlDocumentUrl: '/openapi.yaml',
+  };
+
   const documentFactory = () => SwaggerModule.createDocument(app, config, options);
 
-  SwaggerModule.setup('/', app, documentFactory);
+  SwaggerModule.setup('/', app, documentFactory, custom);
 
   app.useGlobalPipes(
     new ValidationPipe({
