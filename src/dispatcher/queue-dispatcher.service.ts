@@ -1,7 +1,7 @@
 import { InjectQueue } from '@nestjs/bullmq';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Queue } from 'bullmq';
-import { SimulateRequest, JobType } from './dto/simulate.request.dto';
+import { SimulateRequest, JobType } from './dto';
 
 @Injectable()
 export class QueueDispatcherService {
